@@ -3,7 +3,7 @@ const height = 400
 
 const data = d3
 .range(20)
-.map(() => ({x: Math.random() * width, y:Math.random * height}))
+.map(() => ({x: Math.random() * width, y:Math.random() * height}))
 
 const circles = d3
 .select("svg")
@@ -25,11 +25,63 @@ function moveX() {
     circles
     .transition()
     .duration(750)
-    .attr("cx", (d)=> d.x)
+    .attr("cx", (d) => d.x)
 }
 function moveY() {
     circles
     .transition()
     .duration(750)
-    .attr("cx", (d)=> d.y)
+    .attr("cy", (d) => d.y)
 }
+
+const callbacks = [
+    moveLeft,
+    moveX,
+    moveY,
+    moveLeft,
+    moveX,
+    moveY,
+    moveLeft,
+    moveX,
+    moveY,
+    moveLeft,
+    moveX,
+    moveY,
+    moveLeft,
+    moveX,
+    moveY,
+    moveLeft,
+    moveX,
+    moveY,
+    moveLeft,
+    moveX,
+    moveY,
+   
+]
+
+window.addEventListener("scroll", function (e) {
+    console.log(window.scrollY)
+})
+
+const steps = d3.selectAll(".step")
+
+// instantiate the scrollama
+const scroller = scrollama();
+
+// setup the instance, pass callback functions
+scroller
+  .setup({
+    step: ".step",
+  })
+  .onStepEnter((response) => {
+      callbacks[response.index]()
+
+      steps.style("opacity", 0.1)
+      d3.select(response.element).style("opacity", 1)
+      console.log("enter", response)
+    // { element, index, direction }
+  })
+  .onStepExit((response) => {
+      console.log("exit", response)
+    // { element, index, direction }
+  });
