@@ -1,0 +1,25 @@
+
+h1{ color: red;}
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    font-size: 14pt;
+}
+.holder {
+    display: flex;
+}
+
+.steps{
+    width: 40%;
+}
+
+#chart{
+    width: 50%;
+    margin-right: 5px;
+}
+
+.step{
+    margin-top: 50px;
+    min-height: 600px;
+}
